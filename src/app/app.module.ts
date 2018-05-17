@@ -13,6 +13,7 @@ import {AboutPage} from "../pages/about/about";
 import {AngularFireModule} from "angularfire2";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
+import {PlaceService} from "../pages/place/place.service";
 
 export const firebaseConfig = {
   apiKey: "xxxxxxxxxx",
@@ -50,7 +51,8 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PlaceService
   ]
 })
 export class AppModule {}
