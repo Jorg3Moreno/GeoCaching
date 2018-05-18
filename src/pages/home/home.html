@@ -7,6 +7,18 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button color="light" round (click)="navigateToPlace('first place')">Places</button>
-  <p text-center="">Some text</p>
+  <ion-list *ngIf="places">
+    <ion-item *ngFor="let place of places" (click)="goToPlace(place)">
+      <!--<ion-avatar item-start>-->
+        <!--<img src="{{ place.image }}">-->
+      <!--</ion-avatar>-->
+      <h2>{{ place.name }}</h2>
+      <h3>{{ place.address }}</h3>
+      <p>{{ place.category }}</p>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom padding>
+    <button ion-fab color="light" (click)="goToPlace()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

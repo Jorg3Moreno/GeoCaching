@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {AboutPage} from "../about/about";
+import {NavController, NavParams, ToastController} from 'ionic-angular';
+import {PlaceModel} from "./place.model";
+import {PlaceService} from "./place.service";
 
 /**
  * Generated class for the PlacePage page.
@@ -14,22 +15,47 @@ import {AboutPage} from "../about/about";
   templateUrl: 'place.html',
 })
 export class PlacePage {
-  placeName: string;
+  place = new PlaceModel();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.placeName = navParams.get('name');
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private placeService: PlaceService,
+              public toastCtrl: ToastController) {
+    this.place = navParams.get('place');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlacePage');
   }
 
-  navigateBack() {
-    this.navCtrl.pop();
+  savePlace() {
+    if (this.place.id === undefined) {
+      this.placeService.createPlace(this.place)
+        .then(() => {
+          this.showToast('Your Place was successfully saved', 'Ok');
+          this.navCtrl.pop();
+        })
+        .catch((error) => {
+          this.showToast(error, 'Error');
+        });
+    } else {
+      this.placeService.updatePlace(this.place)
+        .then(() => {
+          this.showToast('Your Place was successfully updated', 'Ok');
+        })
+        .catch((error) => {
+          this.showToast(error, 'Error');
+        })
+    }
   }
 
-  navigateToAbout() {
-    this.navCtrl.push(AboutPage);
+  private showToast(msg: string, action: string) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      showCloseButton: true,
+      closeButtonText: action
+    });
+    toast.present();
   }
 
 }

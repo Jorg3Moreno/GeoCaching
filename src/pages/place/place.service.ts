@@ -8,6 +8,7 @@ export class PlaceService {
   }
 
   public createPlace(place: PlaceModel) {
+    place.id = Date.now();
     return this.ngFireDB.database.ref(`/places/${place.id}`).set(place);
   }
 

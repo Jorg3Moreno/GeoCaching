@@ -14,7 +14,33 @@
 
 
 <ion-content padding>
-  <button ion-button="" color="light" round (click)="navigateBack()">Return</button>
-  <button ion-button="" color="light" round (click)="navigateToAbout()">Go About</button>
-  {{ placeName }}
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Place</ion-label>
+      <ion-input type="text" [(ngModel)]="place.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Address</ion-label>
+      <ion-input type="text" [(ngModel)]="place.address"></ion-input>
+    </ion-item>
+    <br/>
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select [(ngModel)]="place.category" interface="action-sheet">
+        <ion-option value="outside">Outside</ion-option>
+        <ion-option value="inside">Inside</ion-option>
+        <ion-option value="other">Other</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea [(ngModel)]="place.description"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom padding>
+    <button ion-fab color="light" (click)="savePlace()"><ion-icon name="checkmark"></ion-icon></button>
+  </ion-fab>
 </ion-content>
