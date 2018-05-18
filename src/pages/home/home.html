@@ -8,14 +8,26 @@
 
 <ion-content padding>
   <ion-list *ngIf="places">
-    <ion-item *ngFor="let place of places" (click)="goToPlace(place)">
-      <!--<ion-avatar item-start>-->
+    <ion-item-sliding *ngFor="let place of places">
+      <ion-item>
+        <!--<ion-avatar item-start>-->
         <!--<img src="{{ place.image }}">-->
-      <!--</ion-avatar>-->
-      <h2>{{ place.name }}</h2>
-      <h3>{{ place.address }}</h3>
-      <p>{{ place.category }}</p>
-    </ion-item>
+        <!--</ion-avatar>-->
+        <h2>{{ place.name }}</h2>
+        <h3>{{ place.address }}</h3>
+        <p>{{ place.category }}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="goToPlace(place)">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+        <button ion-button color="danger" (click)="deletePlace(place)">
+          <ion-icon name="trash"></ion-icon>
+          Remove
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
   <ion-fab right bottom padding>

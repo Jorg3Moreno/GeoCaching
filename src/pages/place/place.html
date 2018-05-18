@@ -15,19 +15,19 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item >
       <ion-label floating>Place</ion-label>
-      <ion-input type="text" [(ngModel)]="place.name"></ion-input>
+      <ion-input type="text" [(ngModel)]="place.name" (ionChange)="onControlChange()"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Address</ion-label>
-      <ion-input type="text" [(ngModel)]="place.address"></ion-input>
+      <ion-input type="text" [(ngModel)]="place.address" (ionChange)="onControlChange()"></ion-input>
     </ion-item>
     <br/>
     <ion-item>
       <ion-label>Category</ion-label>
-      <ion-select [(ngModel)]="place.category" interface="action-sheet">
+      <ion-select interface="action-sheet" [(ngModel)]="place.category" (ionChange)="onControlChange()">
         <ion-option value="outside">Outside</ion-option>
         <ion-option value="inside">Inside</ion-option>
         <ion-option value="other">Other</ion-option>
@@ -36,11 +36,11 @@
 
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-textarea [(ngModel)]="place.description"></ion-textarea>
+      <ion-textarea [(ngModel)]="place.description" (ionChange)="onControlChange()"></ion-textarea>
     </ion-item>
   </ion-list>
 
-  <ion-fab right bottom padding>
+  <ion-fab right bottom padding *ngIf="controlChanged">
     <button ion-fab color="light" (click)="savePlace()"><ion-icon name="checkmark"></ion-icon></button>
   </ion-fab>
 </ion-content>

@@ -16,12 +16,14 @@ import {PlaceService} from "./place.service";
 })
 export class PlacePage {
   place = new PlaceModel();
+  controlChanged: boolean = false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private placeService: PlaceService,
               public toastCtrl: ToastController) {
     this.place = navParams.get('place');
+    this.newPlace();
   }
 
   ionViewDidLoad() {
@@ -42,6 +44,7 @@ export class PlacePage {
       this.placeService.updatePlace(this.place)
         .then(() => {
           this.showToast('Your Place was successfully updated', 'Ok');
+          this.navCtrl.pop();
         })
         .catch((error) => {
           this.showToast(error, 'Error');
@@ -56,6 +59,16 @@ export class PlacePage {
       closeButtonText: action
     });
     toast.present();
+  }
+
+  onControlChange() {
+    this.controlChanged = true;
+  }
+
+  private newPlace() {
+    if (this.place.id === undefined) {
+      this.controlChanged = true;
+    }
   }
 
 }
