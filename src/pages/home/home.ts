@@ -14,7 +14,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public placeService: PlaceService) {
     console.log(`en constructor`);
-    this.placeService.getPlaces()
+    this.placeService.getPlaces().valueChanges()
       .subscribe((places) => {
         this.places = places;
       })
